@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:pertemuan10_2306079/models/product_model.dart";
+import 'dart:convert';
 
 class ProductCard extends StatelessWidget {
   //inilisialisasi variabel untuk menampilkan data produk
@@ -34,16 +35,25 @@ class ProductCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text('Harga: Rp ${product.price}'),
             const SizedBox(height: 8),
-            Text(product.description),
+            product.image.isNotEmpty
+                ? Image.memory(
+                    base64Decode(product.image),
+                    width: 120,
+                    height: 120,
+                    fit: BoxFit.cover,
+                  )
+                : const Icon(Icons.image, size: 120),
           ],
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (onEdit != null)
             IconButton(
               icon: const Icon(Icons.edit, color: Colors.blue),
               onPressed: () => onEdit!(),
             ),
+            if (onDelete != null)
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () => onDelete!(),
@@ -54,5 +64,3 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-
-

@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'login_page.dart';
 import '../models/product_model.dart';
 import 'product_page.dart';
+import '../widgets/product_card.dart';
+import 'product_detail.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -193,6 +195,16 @@ class _HomePageState extends State<HomePage> {
                         itemCount: products.length,
                         itemBuilder: (context, index) {
                           final product = products[index];
+                          return ProductCard(
+                            product: product,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) =>
+                                    ProductDetailPage(product: product),
+                              ),
+                            ),
+                          );
                         },
                       ),
               ),
